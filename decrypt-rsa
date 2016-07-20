@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+if [ $1 ] && [ $2 ]; then
+  PUBKEY="$PWD/$1"
+  ENCRIPT_FILE="$PWD/$2"
+  if [ -e "$PUBKEY" ] && [ -e "$ENCRIPT_FILE" ]; then
+    echo "creating decrypt.txt in directory: $PWD/"
+    openssl rsautl -decrypt -inkey $PUBKEY -in $ENCRIPT_FILE -out decrypt.txt
+  else
+    echo "Error: public_key and file input required!"
+  fi
+else
+  echo "Error: public_key and file input required!"
+fi

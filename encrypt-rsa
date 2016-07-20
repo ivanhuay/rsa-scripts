@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+if [ $1 ] && [ $2 ]; then
+  PUBKEY="$1"
+  DECRIPT_FILE="$2"
+  if [[ -f "$PUBKEY" ]] && [ -f "$DECRIPT_FILE" ]; then
+    echo "creating encrypt.dat in directory: $PWD/"
+    openssl rsautl -encrypt -inkey $PUBKEY -pubin -in $DECRIPT_FILE -out $PWD/encrypt.dat
+  fi
+else
+  echo "Error: public_key and file input required!"
+fi

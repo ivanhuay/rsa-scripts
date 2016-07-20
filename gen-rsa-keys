@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $1 ]; then
+  DIRECTORY="$1"
+else
+  DIRECTORY="."
+fi
+
+if [[ -d "$DIRECTORY" ]]; then
+  echo "creating keys in directory: $DIRECTORY/"
+  openssl genrsa -out $DIRECTORY/private_key.pem 1024
+  openssl rsa -in $DIRECTORY/private_key.pem -out $DIRECTORY/public_key.pem -outform PEM -pubout
+else
+  echo "Error: \"$DIRECTORY\" is not a directory!"
+fi
